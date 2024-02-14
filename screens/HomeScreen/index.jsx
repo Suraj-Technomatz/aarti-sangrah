@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 import { godsName } from "../../utils";
 import BackgroundImage from "../../components/ImageBackground";
@@ -29,20 +23,25 @@ export default function HomeScreen({ navigation }) {
               onPress={() => onHandlePress(godN?.id)}
               style={styles.containerForList}
             >
-              <View>
-                <Image
-                  style={styles.img}
-                  source={{
-                    uri: godN.imageUrl,
-                  }}
-                />
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <View>
+                  <Image
+                    style={styles.img}
+                    source={{
+                      uri: godN.imageUrl,
+                    }}
+                  />
+                </View>
+                <View>
+                  <Text
+                    style={{ fontWeight: "bold", fontSize: 18, marginLeft: 10 }}
+                  >
+                    {godN.name}
+                  </Text>
+                </View>
               </View>
               <View>
-                <Text
-                  style={{ fontWeight: "bold", fontSize: 18, marginLeft: 10 }}
-                >
-                  {godN.name}
-                </Text>
+                <Icon name="angle-right" size={30} color="#900" />
               </View>
             </TouchableOpacity>
           </View>
@@ -54,6 +53,7 @@ export default function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   containerForList: {
+    justifyContent: "space-around",
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 10,

@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import { godsName } from "../../utils/constant";
+import BackgroundImage from "../../components/ImageBackground";
 
 export default function DetailsScreen({ route }) {
   const { id } = route.params;
@@ -15,38 +16,40 @@ export default function DetailsScreen({ route }) {
   const getData = () => {
     return godsName.filter((god) => god.id === id);
   };
-
+  const image = require("../../assets/gradiant.jpg");
   return (
-    <SafeAreaView style={styles.detailsContainer}>
-      <ScrollView>
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          {getData().map((god) => {
-            return (
-              <View key={god.id}>
-                <View>
-                  <Image
-                    style={styles.img}
-                    source={{
-                      uri: god.imageUrl,
-                    }}
-                  />
-                </View>
-                <View style={styles.godHeadContainer}>
-                  <Text style={styles.godHead}>{god.name}</Text>
-                </View>
-                {god.lyrics.map((lyric) => (
+    <BackgroundImage source={image}>
+      <SafeAreaView style={styles.detailsContainer}>
+        <ScrollView>
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          >
+            {getData().map((god) => {
+              return (
+                <View key={god.id}>
                   <View>
-                    <Text style={styles.lyric}>{lyric}</Text>
+                    <Image
+                      style={styles.img}
+                      source={{
+                        uri: god.imageUrl,
+                      }}
+                    />
                   </View>
-                ))}
-              </View>
-            );
-          })}
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+                  <View style={styles.godHeadContainer}>
+                    <Text style={styles.godHead}>{god.name}</Text>
+                  </View>
+                  {god.lyrics.map((lyric) => (
+                    <View>
+                      <Text style={styles.lyric}>{lyric}</Text>
+                    </View>
+                  ))}
+                </View>
+              );
+            })}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </BackgroundImage>
   );
 }
 
