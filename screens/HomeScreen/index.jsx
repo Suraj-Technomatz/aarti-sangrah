@@ -4,7 +4,7 @@ import { godsName } from "../../utils";
 
 export default function HomeScreen({ navigation }) {
   const onHandlePress = (id) => {
-    navigation.navigate("Details", {
+    navigation.navigate("आरती", {
       id,
     });
   };
