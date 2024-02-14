@@ -12,8 +12,11 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
       {godsName.map((godN) => (
-        <View key={godN?.id} style={styles.containerForList}>
-          <TouchableOpacity onPress={() => onHandlePress(godN?.id)}>
+        <View key={godN?.id}>
+          <TouchableOpacity
+            onPress={() => onHandlePress(godN?.id)}
+            style={styles.containerForList}
+          >
             <View>
               <Image
                 style={styles.img}
@@ -22,9 +25,13 @@ export default function HomeScreen({ navigation }) {
                 }}
               />
             </View>
-            <Text style={{ fontWeight: "bold", fontSize: 18, marginLeft: 10 }}>
-              {godN.name}
-            </Text>
+            <View>
+              <Text
+                style={{ fontWeight: "bold", fontSize: 18, marginLeft: 10 }}
+              >
+                {godN.name}
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       ))}

@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Button, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Image,
+} from "react-native";
 import { godsName } from "../../utils/constant";
 
 export default function DetailsScreen({ route }) {
@@ -10,35 +17,44 @@ export default function DetailsScreen({ route }) {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>{id}</Text>
-      {getData().map((god) => {
-        return (
-          <View key={god.id}>
-            <View>
-              <Image
-                style={styles.img}
-                source={{
-                  uri: god.imageUrl,
-                }}
-              />
-            </View>
-            <View style={styles.godHeadContainer}>
-              <Text style={styles.godHead}>{god.name}</Text>
-            </View>
-            {god.lyrics.map((lyric) => (
-              <View>
-                <Text style={styles.lyric}>{lyric}</Text>
+    <SafeAreaView style={styles.detailsContainer}>
+      <ScrollView>
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          {getData().map((god) => {
+            return (
+              <View key={god.id}>
+                <View>
+                  <Image
+                    style={styles.img}
+                    source={{
+                      uri: god.imageUrl,
+                    }}
+                  />
+                </View>
+                <View style={styles.godHeadContainer}>
+                  <Text style={styles.godHead}>{god.name}</Text>
+                </View>
+                {god.lyrics.map((lyric) => (
+                  <View>
+                    <Text style={styles.lyric}>{lyric}</Text>
+                  </View>
+                ))}
               </View>
-            ))}
-          </View>
-        );
-      })}
-    </View>
+            );
+          })}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  detailsContainer: {
+    marginVertical: 20,
+    padding: 20,
+  },
   godHeadContainer: {
     marginVertical: 20,
   },
