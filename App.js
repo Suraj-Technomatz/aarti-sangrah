@@ -5,6 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "./screens/HomeScreen";
 import DetailsScreen from "./screens/DetailsScreen";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import HeartIcon from "./components/HeartIcon";
 
 const Stack = createStackNavigator();
 
@@ -13,7 +15,20 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="आरती संग्रह">
         <Stack.Screen name="आरती संग्रह" component={HomeScreen} />
-        <Stack.Screen name="आरती" component={DetailsScreen} />
+        <Stack.Screen
+          name="आरती"
+          component={DetailsScreen}
+          // options={{
+          //   headerTitle: "आरती",
+          //   headerRight: () => (
+          //     <FontAwesome name="heart-o" size={30} color="red" />
+          //   ),
+          // }}
+          options={{
+            headerShown: false, // Disable default header
+            header: () => <HeartIcon />, // Use custom header component
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

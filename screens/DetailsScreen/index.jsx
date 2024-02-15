@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,8 +9,14 @@ import {
 } from "react-native";
 import { godsName } from "../../utils/constant";
 import BackgroundImage from "../../components/ImageBackground";
+import HeartIcon from "../../components/HeartIcon";
 
-export default function DetailsScreen({ route }) {
+export default function DetailsScreen({ route, navigation }) {
+  const [isLiked, setIsLiked] = useState(false);
+  const handlePress = () => {
+    setIsLiked(!isLiked); // Toggle the filled state
+  };
+
   const { id } = route.params;
 
   const getData = () => {
@@ -18,45 +24,56 @@ export default function DetailsScreen({ route }) {
   };
   const image = require("../../assets/gradiant.jpg");
   return (
-    <BackgroundImage source={image}>
-      <SafeAreaView style={styles.detailsContainer}>
-        <ScrollView>
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
-            {getData().map((god) => {
-              return (
-                <View key={god.id}>
-                  <View>
-                    <Image
-                      style={styles.img}
-                      source={{
-                        uri: god.imageUrl,
-                      }}
-                    />
-                  </View>
-                  <View style={styles.godHeadContainer}>
-                    <Text style={styles.godHead}>{god.name}</Text>
-                  </View>
-                  {god.lyrics.map((lyric) => (
+    <>
+      <BackgroundImage source={image}>
+        <SafeAreaView style={styles.detailsContainer}>
+          <HeartIcon
+            isLiked={isLiked}
+            handlePress={handlePress}
+            label="आरती"
+            navigation={navigation}
+          />
+          <ScrollView>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {getData().map((god) => {
+                return (
+                  <View key={god.id}>
                     <View>
-                      <Text style={styles.lyric}>{lyric}</Text>
+                      <Image
+                        style={styles.img}
+                        source={{
+                          uri: god.imageUrl,
+                        }}
+                      />
                     </View>
-                  ))}
-                </View>
-              );
-            })}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </BackgroundImage>
+                    <View style={styles.godHeadContainer}>
+                      <Text style={styles.godHead}>{god.name}</Text>
+                    </View>
+                    {god.lyrics.map((lyric) => (
+                      <View>
+                        <Text style={styles.lyric}>{lyric}</Text>
+                      </View>
+                    ))}
+                  </View>
+                );
+              })}
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+      </BackgroundImage>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   detailsContainer: {
-    marginVertical: 20,
-    padding: 20,
+    marginVertical: 50,
   },
   godHeadContainer: {
     marginVertical: 20,
